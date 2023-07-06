@@ -25,6 +25,7 @@ export default async function Route(props: RouteProps) {
 	};
 	const data = await new Promise(r => setTimeout(() => r(ddd), 800));
 
+	// @ts-ignore
 	const Component = routableComponentMap[data.routable_type];
 	if (!Component) {
 		return notFound();
