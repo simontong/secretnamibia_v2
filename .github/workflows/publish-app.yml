@@ -11,6 +11,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install NPM modules
+        run: yarn
+        working-directory: app
+
       - name: Build
         run: yarn build
         working-directory: app
