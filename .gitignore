@@ -1,0 +1,30 @@
+.DS_Store
+.nyc_output
+.v8-profiling
+**/node_modules
+**/dist
+**/coverage
+
+tsconfig.tsbuildinfo
+
+# local env files
+.env
+.env.*
+!.env.example
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# other
+.fuse_hidden*
+
+# Local Netlify folder
+.netlify
+
+code.*
+code/src.*
+
+# miniflare cache
+.mf
