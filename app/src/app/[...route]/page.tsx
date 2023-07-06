@@ -16,7 +16,7 @@ const getRoute = async (props: RouteProps) => {
 	const route = params.route.join(":");
 
 	const res = await fetch(`${process.env.DIRECTUS_CACHE_URL}/list/test`);
-	return res.json();
+	return res.text();
 };
 
 type RouteProps = {
