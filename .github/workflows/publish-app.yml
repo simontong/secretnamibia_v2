@@ -11,9 +11,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install NPM modules
-        run: yarn install
-        working-directory: app
+      - uses: ./.github/actions/install-npm-modules
+        with:
+          WORKDIR: ./app
+          GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Build
         run: yarn next-on-pages
