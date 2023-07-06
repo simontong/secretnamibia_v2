@@ -1,32 +1,43 @@
-.DS_Store
-.nyc_output
-.v8-profiling
-**/node_modules
-**/dist
-**/coverage
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+/.pnp
+.pnp.js
 
 .wrangler
 
-tsconfig.tsbuildinfo
+# testing
+coverage
+test-results
+cypress/logs
+cypress/screenshots
+cypress/videos
 
-# local env files
-.env
-.env.*
-!.env.example
+# next.js
+.next/
+out/
+.swc
 
-# Log files
+# production
+/build
+
+# misc
+*.pem
+.DS_Store
+.fuse_hidden*
+
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# other
-.fuse_hidden*
+# local env files
+.env*.local
 
-# Local Netlify folder
-.netlify
+# vercel
+.vercel
 
-code.*
-code/src.*
-
-# miniflare cache
-.mf
+# typescript
+*.tsbuildinfo
+next-env.d.ts

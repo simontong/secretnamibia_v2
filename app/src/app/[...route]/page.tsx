@@ -13,11 +13,11 @@ export const runtime = "edge";
 
 const getRoute = async (props: RouteProps) => {
 	const { params } = props;
-	const route = params.route.join("/");
+	const route = params.route.join(":");
 
-	const res = await fetch("https://directus-cache.cg01.workers.dev/list/test");
-	// const res = await fetch("https://httpbin.org/anything");
-	return res.text();
+	console.log(`${process.env.DIRECTUS_CACHE_URL}/list/test/${encodeURI(route)}`)
+	const res = await fetch(`${process.env.DIRECTUS_CACHE_URL}/list/test/${encodeURI(route)}`);
+	return res.json();
 };
 
 type RouteProps = {
@@ -36,8 +36,7 @@ export default async function Route(props: RouteProps) {
 
 	return (
 		<>
-			<div dangerouslySetInnerHTML={{ __html: data }}/>
-			{/*<pre>{JSON.stringify(data, null, 2)}</pre>*/}
+			<pre>{JSON.stringify(data, null, 2)}</pre>
 			<br/>
 		</>
 	);

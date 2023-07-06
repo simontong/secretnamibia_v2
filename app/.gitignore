@@ -7,17 +7,23 @@
 
 # testing
 /coverage
+/test-results
+/cypress/logs
+/cypress/screenshots
+/cypress/videos
 
 # next.js
 /.next/
 /out/
+/.swc
 
 # production
 /build
 
 # misc
-.DS_Store
 *.pem
+.DS_Store
+.fuse_hidden*
 
 # debug
 npm-debug.log*

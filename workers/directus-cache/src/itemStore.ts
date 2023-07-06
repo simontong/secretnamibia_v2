@@ -35,7 +35,9 @@ export async function read(collection: string, key: string, pk: string) {
 	const kvKey = toKeyname(collection, key, pk);
 	try {
 		return await DB.read<Item>(DIRECTUS_CF_CACHE_KV, kvKey, 'json');
-	} catch (err) {}
+	} catch (err) {
+		console.log(err)
+	}
 }
 
 export function destroy(collection: string, key: string, pk: string) {
