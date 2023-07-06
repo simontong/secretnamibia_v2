@@ -1,0 +1,17 @@
+{
+  "name": "directus-cache",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler publish",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230419.0",
+    "@types/lodash": "^4.14.182",
+    "dotenv": "^16.0.1",
+    "lodash": "^4.17.21",
+    "worktop": "^0.7.3",
+    "wrangler": "^3.0.0"
+  }
+}

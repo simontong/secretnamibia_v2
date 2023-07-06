@@ -1,0 +1,41 @@
+version: '3'
+
+networks:
+  supabase_network_admin:
+    external: true
+  docker_default:
+    external: true
+
+services:
+  directus:
+    container_name: secretnamibia_v2_directus
+    image: directus/directus:latest
+    networks:
+      - docker_default
+      - supabase_network_admin
+    ports:
+      - '8055:8055'
+    volumes:
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
+    environment:
+      KEY: '002b1004-55dc-4474-a5b0-36c3e031e9d0'
+      SECRET: '7936e3db-c562-4969-91d2-585a40609cbe'
+
+      DB_CLIENT: 'pg'
+      DB_HOST: 'supabase_db_admin'
+      DB_PORT: '5432'
+      DB_DATABASE: 'postgres'
+      DB_USER: 'postgres'
+      DB_PASSWORD: 'postgres'
+
+      CACHE_ENABLED: 'true'
+      CACHE_STORE: 'redis'
+      REDIS: 'redis://redis:6379'
+
+      ADMIN_EMAIL: 'simon@secretnamibia.com'
+      ADMIN_PASSWORD: 'changeme12'
+
+      # Make sure to set this in production
+      # (see https://docs.directus.io/self-hosted/config-options#general)
+      # PUBLIC_URL: 'https://directus.example.com'

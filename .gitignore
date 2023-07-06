@@ -5,6 +5,8 @@
 **/dist
 **/coverage
 
+.wrangler
+
 tsconfig.tsbuildinfo
 
 # local env files

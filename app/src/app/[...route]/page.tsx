@@ -5,6 +5,21 @@ import { notFound } from "next/navigation";
 
 export const runtime = "edge";
 
+// const routableComponentMap = {
+// 	category: Category,
+// 	page: Page,
+// 	post: Post,
+// };
+
+const getRoute = async (props: RouteProps) => {
+	const { params } = props;
+	const route = params.route.join("/");
+
+	const res = await fetch("https://directus-cache.cg01.workers.dev/list/test");
+	// const res = await fetch("https://httpbin.org/anything");
+	return res.text();
+};
+
 type RouteProps = {
 	params: {
 		route: string[];
@@ -12,35 +27,18 @@ type RouteProps = {
 	searchParams: URLSearchParams;
 }
 
-const routableComponentMap = {
-	category: Category,
-	page: Page,
-	post: Post,
-};
-
 export default async function Route(props: RouteProps) {
-	const { params } = props;
-	const route = params.route.join("/");
+	const data = await getRoute(props);
 
-	const ddd = {
-		routable_type: "category",
-	};
-	const data = await new Promise(r => setTimeout(() => r(ddd), 800));
-
-	// @ts-ignore
-	const Component = routableComponentMap[data.routable_type];
-	if (!Component) {
-		return notFound();
-	}
-
-	// const res = await fetch("http://localhost:8055/get/route");
-	// const data = await res.json();
+	// if (!data) {
+	// 	return notFound();
+	// }
 
 	return (
 		<>
-			<pre>{JSON.stringify(data, null, 2)}</pre>
+			<div dangerouslySetInnerHTML={{ __html: data }}/>
+			{/*<pre>{JSON.stringify(data, null, 2)}</pre>*/}
 			<br/>
-			<Component/>
 		</>
 	);
 }
