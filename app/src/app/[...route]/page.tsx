@@ -3,6 +3,8 @@ import { Page } from "@/src/components/routables/Page";
 import { Post } from "@/src/components/routables/Post";
 import { notFound } from "next/navigation";
 
+export const runtime = "edge";
+
 type RouteProps = {
 	params: {
 		route: string[];
