@@ -13,6 +13,7 @@ jobs:
 
       - name: Build
         run: yarn build
+        working-directory: app
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
