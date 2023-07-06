@@ -20,7 +20,7 @@ jobs:
         working-directory: app
 
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/pages-action@v1.5.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ccbd6cb2c3b8122463ac3fa66c3ff2cf
@@ -32,6 +32,4 @@ jobs:
           # Optional: Switch what branch you are publishing to.
           # By default, this will be the branch which triggered this workflow
           branch: develop
-          # Optional: Change the working directory
-          # Optional: Change the Wrangler version, allows you to point to a specific version or a tag such as `beta`
           wranglerVersion: '3'
