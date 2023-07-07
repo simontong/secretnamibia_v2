@@ -30,7 +30,7 @@ jobs:
           # Optional: Switch what branch you are publishing to.
           # By default, this will be the branch which triggered this workflow
           branch: develop
-          wranglerVersion: '2'
+          wranglerVersion: '3'
 
           projectName: secretnamibia-v2
           accountId: ccbd6cb2c3b8122463ac3fa66c3ff2cf
