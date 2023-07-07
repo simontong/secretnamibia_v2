@@ -37,6 +37,7 @@ export default async function Route(props: RouteProps) {
 		<>
 			<pre>{JSON.stringify(data, null, 2)}</pre>
 			<br/>
+			hello
 		</>
 	);
 }
