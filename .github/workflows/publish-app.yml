@@ -18,7 +18,7 @@ jobs:
           GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Build
-        run: yarn next-on-pages
+        run: npx @cloudflare/next-on-pages@1
         working-directory: app
 
       - name: Publish to Cloudflare Pages
