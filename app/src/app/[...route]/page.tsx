@@ -15,8 +15,8 @@ const getRoute = async (props: RouteProps) => {
 	const { params } = props;
 	const route = params.route.join(":");
 
-	// const res = await fetch(`${process.env.DIRECTUS_CACHE_URL}/list/test`);
-	const res = await fetch(`https://httpbin.org/anything`);
+	const url = `${process.env.DIRECTUS_CACHE_URL}/list/test`;
+	const res = await fetch(url);
 	return res.text();
 };
 
