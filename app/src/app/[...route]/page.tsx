@@ -41,27 +41,3 @@ export default async function Route(props: RouteProps) {
 		</>
 	);
 }
-	return res.text();
-};
-
-type RouteProps = {
-	params: {
-		route: string[];
-	};
-	searchParams: URLSearchParams;
-}
-
-export default async function Route(props: RouteProps) {
-	const data = await getRoute(props);
-
-	// if (!data) {
-	// 	return notFound();
-	// }
-
-	return (
-		<>
-			<pre>{JSON.stringify(data, null, 2)}</pre>
-			<br/>
-		</>
-	);
-}
