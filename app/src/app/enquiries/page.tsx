@@ -2,6 +2,8 @@ import { getRoute } from "@/src/lib";
 import { Metadata } from "next";
 import { get } from "lodash";
 
+export const runtime = 'edge';
+
 type Props = {
 	params: { id: string }
 	searchParams: { [key: string]: string | string[] | undefined }
