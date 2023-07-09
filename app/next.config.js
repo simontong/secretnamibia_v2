@@ -1,8 +1,8 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-	serverRuntimeConfig: {
-		workerDirectusCacheUrl: process.env.WORKER_DIRECTUS_CACHE_URL,
-		token: "paa9sr3t4VmmowB6XS0W8tu4uxi6ydZI",
+	env: {
+		DIRECTUS_URL: process.env.DIRECTUS_URL,
+		DIRECTUS_API_TOKEN: process.env.DIRECTUS_API_TOKEN,
 	},
 };
 

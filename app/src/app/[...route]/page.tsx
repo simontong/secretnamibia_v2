@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getCategory, getPage, getRoute, getTour } from "@/src/lib";
+import { getRoute } from "@/src/lib";
 import { get } from "lodash";
 import { TourRoutable } from "@/src/components/routables/TourRoutable";
 import { PostRoutable } from "@/src/components/routables/PostRoutable";

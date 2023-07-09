@@ -2,7 +2,7 @@ import { getHome, getRoute } from "@/src/lib";
 import { Metadata } from "next";
 import { get } from "lodash";
 
-export const runtime = 'edge';
+export const runtime = "edge";
 
 type Props = {
 	params: { id: string }
