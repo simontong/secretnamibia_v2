@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@cloudflare/next-on-pages": "^1.2.0",
+    "@supabase/supabase-js": "^2.26.0",
     "@types/lodash": "^4.14.195",
     "@types/node": "20.4.0",
     "@types/react": "18.2.14",

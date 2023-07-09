@@ -12,7 +12,6 @@ const token = process.env.DIRECTUS_API_TOKEN;
 
 const request = (pathname: string, opts?: RequestInit) => {
 	const url = new URL(pathname, directusUrl);
-
 	console.log(url.href);
 
 	return fetch(url, defaultsDeep(opts, {
@@ -26,105 +25,68 @@ const request = (pathname: string, opts?: RequestInit) => {
 		.catch(err => err?.message);
 };
 
-export const getRoute = async (...slugs: string[]) => {
-	const searchParams = new URLSearchParams;
-
-	// must be home page
-	if (slugs.length === 0) {
-		searchParams.append("filter[slug][_empty]", "");
-	} else {
-		searchParams.append("filter[slug][_in]", slugs.join(","));
-	}
-
-	searchParams.append("fields[]", "*");
-	searchParams.append("fields[]", "routable.*");
-
-	// console.log(decodeURI(url.search));
-
-	return request(`/items/routes?${searchParams}`);
-};
-
-export const getPost = async (id: string) => {
+export const getRoutable = async (...slugs: string[]) => {
 	const body = {
-		variables: { id },
+		variables: { slugs },
 		query: `
-			query getPost($id: String) {
-				posts(filter: { id: { _eq: $id }}) {
-					title
-				}
-			}
-		`,
-	};
+			query getRoutable($slugs: [String!]!) {
+				routes(filter: { slug: { _in: $slugs } }) {
+					browser_title
+					meta_description
+					structured_markup
+					sitemap
 
-	return request("/graphql", {
-		method: "post",
-		body: JSON.stringify(body),
-	});
-};
+					routable {
+						collection
+						item {
+							... on categories {
+								id
+								title
+							}
 
-export const getPage = async (id: string) => {
-	const body = {
-		variables: { id },
-		query: `
-			query getPage($id: String) {
-				pages(filter: { id: { _eq: $id }}) {
-					title
-				}
-			}
-		`,
-	};
+							... on posts {
+								id
+								title
+							}
 
-	return request("/graphql", {
-		method: "post",
-		body: JSON.stringify(body),
-	});
-};
+							... on pages {
+								id
+								title
+							}
 
-export const getCategory = async (id: string) => {
-	const body = {
-		variables: { id },
-		query: `
-			query getCategory($id: String) {
-				categories(filter: { id: { _eq: $id }}) {
-					title
-				}
-			}
-		`,
-	};
+							... on tours {
+								id
+								title
+								highlights
+								included
+								excluded
 
-	return request("/graphql", {
-		method: "post",
-		body: JSON.stringify(body),
-	});
-};
+								category {
+									id
+									title
+								}
 
-export const getTour = async (id: string) => {
-	const body = {
-		variables: { id },
-		query: `
-			query getTour($id: String) {
-				tours(filter: { id: { _eq: $id }}) {
-					title
-          highlights
-          included
-          excluded
+								secondary_categories {
+									categories_id {
+										id
+										title
+									}
+								}
 
-					category {
-            id
-						title
-					}
-
-					days(sort: ["sort"]) {
-						sort
-						title
-            activities
-            
-            destination {
-              title
-            }
+								days(sort: ["sort"]) {
+									sort
+									title
+									activities
+									
+									destination {
+										title
+									}
+								}
+							}
+						}
 					}
 				}
-			}
+			}		
 		`,
 	};
 
@@ -138,22 +100,37 @@ export const getHome = async () => {
 	const body = {
 		query: `
 			query {
-				home {
-					featured_categories(filter: { home_id: { id: { _neq: null } } }) {
-						home_id {
-							id
-						}
-					}
+				routes(filter: { slug: { _empty: true } }) {
+					browser_title
+					meta_description
+					structured_markup
+					sitemap
 
-					featured_tours(filter: { home_id: { id: { _neq: null } } }) {
-						home_id {
-							id
-						}
-					}
+					routable {
+						collection
+						item {
+							... on home {
+								featured_categories {
+									categories_id {
+										id
+										title
+									}
+								}
 
-					featured_posts(filter: { home_id: { id: { _neq: null } } }) {
-						home_id {
-							id
+								featured_tours {
+									tours_id {
+										id
+										title
+									}
+								}
+
+								featured_posts {
+									posts_id {
+										id
+										title
+									}
+								}
+							}
 						}
 					}
 				}
