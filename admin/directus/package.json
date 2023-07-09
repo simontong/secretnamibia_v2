@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@types/knex": "^0.16.1",
+    "directus": "^10.4.2",
+    "pg": "^8.11.1"
+  }
+}

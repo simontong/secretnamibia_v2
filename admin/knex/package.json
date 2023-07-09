@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "km": "knex-migrate"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "knex": "^2.4.2",
+    "knex-migrate": "^1.7.4",
+    "pg": "^8.11.1"
+  }
+}

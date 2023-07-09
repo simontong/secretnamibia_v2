@@ -41,6 +41,6 @@ preview_id = "a62e7fe72eb84404b7414496235ebba6"
 # SHARED_VARIABLE = "shared_value"
 
 [vars]
-DIRECTUS_SERVER_URL = "https://directus.secretnamibia.com"
+DIRECTUS_SERVER_URL = "http://127.0.0.1:8055"
 DIRECTUS_ACCESS_TOKEN = "H1j426kxThgxxI4eiOhtRNyfcv_7V9FT"
 DIRECTUS_WEBHOOK_SECRET = "SomeSecret123"

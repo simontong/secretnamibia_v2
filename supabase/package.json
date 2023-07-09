@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "supabase":"supabase"
-  },
-  "devDependencies": {
-    "supabase": "^1.75.3"
-  }
-}

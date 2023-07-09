@@ -4,18 +4,22 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "debug": "NODE_OPTIONS='--inspect=:9228' next dev",
     "build": "next build",
+    "build-pages": "next-on-pages",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@cloudflare/next-on-pages": "^1.2.0",
+    "@types/lodash": "^4.14.195",
     "@types/node": "20.4.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
+    "lodash": "^4.17.21",
     "next": "13.4.9",
     "postcss": "8.4.25",
     "react": "18.2.0",

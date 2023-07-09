@@ -1,35 +1,54 @@
-import { Category } from "@/src/components/routables/Category";
-import { Page } from "@/src/components/routables/Page";
-import { Post } from "@/src/components/routables/Post";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import { getCategory, getPage, getRoute, getTour } from "@/src/lib";
+import { get } from "lodash";
+import { TourRoutable } from "@/src/components/routables/TourRoutable";
+import { PostRoutable } from "@/src/components/routables/PostRoutable";
+import { PageRoutable } from "@/src/components/routables/PageRoutable";
+import { CategoryRoutable } from "@/src/components/routables/CategoryRoutable";
 
 export const runtime = "edge";
 
-// const routableComponentMap = {
-// 	category: Category,
-// 	page: Page,
-// 	post: Post,
-// };
-
-const getRoute = async (props: RouteProps) => {
-	const { params } = props;
-	const route = params.route.join(":");
-
-	const res = await fetch(`${process.env.DIRECTUS_CACHE_URL}/list/test`);
-	return res.text();
-};
-
-type RouteProps = {
-	params: {
-		route: string[];
-	};
-	searchParams: URLSearchParams;
+type Props = {
+	params: { id: string }
+	searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function Route(props: RouteProps) {
-	const data = await getRoute(props);
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+	const slugs = get(params, "route", []);
+	const data = await getRoute(...slugs);
 
-	// if (!data) {
+	return data.data?.[0]?.metadata;
+};
+
+export default async function Route(props: Props) {
+	const slugs = get(props.params, "route", []);
+
+	const data = await getRoute(...slugs);
+	const route = data.data?.at(-1)?.routable?.at(-1) || {};
+	const { collection } = route;
+
+	let routable = null;
+	switch (collection) {
+		case "tours":
+			return <TourRoutable routes={data.data}/>;
+
+		case "posts":
+			return <PostRoutable routes={data.data}/>;
+
+		case "pages":
+			return <PageRoutable routes={data.data}/>;
+
+		case "categories":
+			return <CategoryRoutable routes={data.data}/>;
+	}
+
+	// let ddd = null;
+	// if (collection === 'pages') {
+	// 	ddd = await getPage(id)
+	// }
+
+	// if (!data.data.length) {
 	// 	return notFound();
 	// }
 
@@ -37,7 +56,9 @@ export default async function Route(props: RouteProps) {
 		<>
 			<pre>{JSON.stringify(data, null, 2)}</pre>
 			<br/>
-			hello
+			<pre>{JSON.stringify(route, null, 2)}</pre>
+			<br/>
+			<pre>{JSON.stringify(routable, null, 2)}</pre>
 		</>
 	);
 }
